@@ -11,7 +11,7 @@ export const register = async(req, res)=>{
             return res.status(400).json({message:"Password do not match"}); 
         }
         // If user already exists in our database
-        const user = await UserActivation.findOne({username});
+        const user = await User.findOne({username});
         if(user){
             return res.status(400).json({message:"Username already exists try different name"})
         }
@@ -27,8 +27,12 @@ export const register = async(req, res)=>{
             fullName, // here both key and value are same so not necessary to give it explicitely
             username,
             password:hashedPassword, // key and value pair
-            profilePhoto: gender === male? maleProfilePhoto : femaleProfilePhoto,
+            profilePhoto: gender === "male"? maleProfilePhoto : femaleProfilePhoto,
             gender
+        });
+        return res.status(201).json({
+            message:"Account created successfully",
+            success:true
         })
     }catch(error){
         console.log(error); 
