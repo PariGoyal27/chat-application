@@ -1,5 +1,6 @@
 import { User } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 export const register = async(req, res)=>{
     try{
@@ -36,5 +37,44 @@ export const register = async(req, res)=>{
         })
     }catch(error){
         console.log(error); 
+    }
+};
+export const login = async (req, res)=>{
+    try {
+        const {username, password} = req.body;
+        if(!username || !password){
+            return res.status(400).json({
+                message: "All fields are required"
+            });
+        };
+        const user = await User.findOne({username});
+        if(!user){
+            return res.status(400).json({
+                message: "Incorrect username or password",
+                success:false
+            })
+        };
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if(!isPasswordMatch){
+            return res.status(400).json({
+                message: "Incorrect username or password",
+                success:false
+            })
+        };
+        const tokenData={
+            userId:user._id
+        };
+
+        const token = await jwt.sign(tokenData, process.env.JWT_SECRET_KEY, {expiresIn:'2d'});
+
+        // key"token" and value token
+        return res.status(200).cookie("token", token, {maxAge:2*24*60*60*1000,/* 2 days in ms */httpOnly:true, sameSite:'strict'}).json({
+            _id:user._id,
+            username:user.username,
+            fullName:user.fullName,
+            profilePhoto:user.profilePhoto
+        });
+    } catch (error) {
+        console.log(error);
     }
 }
