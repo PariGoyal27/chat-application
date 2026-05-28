@@ -21,8 +21,8 @@ export const register = async(req, res)=>{
         const hashedPassword = await bcrypt.hash(password, 10); // 10 is length that is default
 
         // profilePhoto -> used a website avatar-placeholder
-        const maleProfilePhoto = `https://api.dicebear.com/7.x/avataaars/svg?seed=John?username=${username}`
-        const femaleProfilePhoto = `https://api.dicebear.com/7.x/avataaars/svg?seed=Jane?username=${username}`
+        const maleProfilePhoto = `https://api.dicebear.com/7.x/avataaars/svg?seed=Jane?username=${username}`
+        const femaleProfilePhoto = `https://api.dicebear.com/7.x/avataaars/svg?seed=John?username=${username}`
 
         await User.create({
             fullName, // here both key and value are same so not necessary to give it explicitely
@@ -90,7 +90,7 @@ export const logout = (req, res)=>{
 export const getOtherUsers = async(req, res)=>{
     try {
         const loggedInUserId = req.id;
-        const otherUsers = await User.find({_id:{$ne:loggedInUserId}}).select("-password");
+        const otherUsers = await User.find({_id:{$ne:loggedInUserId}}).select("-password"); // password should not be printed
         return res.status(200).json(otherUsers);
     } catch (error) {
         console.log(error)

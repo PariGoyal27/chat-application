@@ -3,6 +3,7 @@ import express from "express"; // method-2
 import dotenv from "dotenv";
 import userRoute from "./routes/userRoute.js";
 import connectDB from "./config/database.js";
+import messageRoute from "./routes/messageRoute.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config({});
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 // routes
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/message", messageRoute);
 
 // app.get("/", (req, res) => {
 //     res.send("Server started working");
