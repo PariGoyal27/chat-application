@@ -78,7 +78,7 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="btn btn-block btn-md mt-2 btn-error"
+              className="btn btn-block btn-sm mt-2"
             >
               Login
             </button>
