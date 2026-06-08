@@ -28,6 +28,7 @@ const Login = () => {
       );
       // console.log(res);
       navigate("/");
+      toast.success("logged in successfully");
       // console.log(JSON.stringify(res.data, null, 2));
       dispatch(setAuthUser(res.data));
     } catch (error) {
@@ -76,10 +77,7 @@ const Login = () => {
             </Link>
           </p>
           <div>
-            <button
-              type="submit"
-              className="btn btn-block btn-sm mt-2"
-            >
+            <button type="submit" className="btn btn-block btn-sm mt-2">
               Login
             </button>
           </div>
