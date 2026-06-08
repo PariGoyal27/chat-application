@@ -31,7 +31,7 @@ export const sendMessage = async(req, res)=>{
         // SOCKET IO - will be implemented using frontend
 
         return res.status(201).json({
-            message:"Message sent successfully"
+            newMessage
         })
     } catch (error) {
         console.log(error);

@@ -15,7 +15,7 @@ const Login = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault(); // so the page don't get reloaded
     try {
-      console.log(user);
+      // console.log(user);
       const res = await axios.post(
         `http://localhost:8080/api/v1/user/login`,
         user,
