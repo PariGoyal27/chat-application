@@ -1,18 +1,19 @@
 import React from "react";
 import OtherUser from "./OtherUser";
 import useGetOtherUsers from "../hooks/useGetOtherUsers";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
-const OtherUsers = () => {
+const OtherUsers = ({ users }) => {
   // my custom hook
   useGetOtherUsers();
-  const {otherUsers} = useSelector(store=>store.user);
-  if(!otherUsers) return; // early return in react
+  if(!users) return null;
+  // const {otherUsers} = useSelector(store=>store.user);
+  // if(!otherUsers) return; // early return in react
 
   return (
     <div className="h-full overflow-y-auto users-scroll">
       {
-        otherUsers?.map((user)=>{
+        users?.map((user)=>{
           return (
             <OtherUser key={user._id} user={user}/>
           )

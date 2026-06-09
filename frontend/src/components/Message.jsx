@@ -24,7 +24,10 @@ const Message = ({ message }) => {
           />
         </div>
       </div>
-      <div className="chat-header">
+      <div className="chat-header flex gap-2">
+        <time className="text-xs opacity-50 text-white">
+          {new Date(message?.createdAt).toLocaleDateString("en-IN")}
+        </time>
         <time className="text-xs opacity-50 text-white">
           {new Date(message?.createdAt).toLocaleTimeString([], {
             hour: "2-digit",
@@ -32,7 +35,7 @@ const Message = ({ message }) => {
           })}
         </time>
       </div>
-      <div className="chat-bubble">{message?.message}</div>
+      <div className="chat-bubble max-w-xs break-words">{message?.message}</div>
     </div>
   );
 };
