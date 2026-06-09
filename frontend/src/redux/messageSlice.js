@@ -4,7 +4,7 @@ import { create } from "axios";
 const messageSlice = createSlice({
   name: "message",
   initialState: {
-    messages: null,
+    messages: [],
   },
   reducers: {
     setMessages: (state, action) => {

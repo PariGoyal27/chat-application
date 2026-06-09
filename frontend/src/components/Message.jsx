@@ -35,7 +35,7 @@ const Message = ({ message }) => {
           })}
         </time>
       </div>
-      <div className="chat-bubble max-w-xs break-words">{message?.message}</div>
+      <div className={`chat-bubble ${authUser?._id === message?.senderId ? "" : "bg-slate-400 text-zinc-900"} max-w-xs break-words`}>{message?.message}</div>
     </div>
   );
 };
