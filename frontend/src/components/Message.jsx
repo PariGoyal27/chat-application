@@ -17,7 +17,7 @@ const Message = ({ message }) => {
           <img
             alt="Tailwind CSS chat bubble component"
             src={
-              message?.senderId == authUser?._id
+              message?.senderId === authUser?._id
                 ? authUser?.profilePhoto
                 : selectedUser?.profilePhoto
             }
