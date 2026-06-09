@@ -4,13 +4,16 @@ import OtherUsers from "./OtherUsers";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthUser } from "../redux/userSlice";
 
 const Sidebar = () => {
   const [search, setSearch] = useState("");
   const [searchedUsers, setSearchedUsers] = useState(null);
 
   const { otherUsers } = useSelector((store) => store.user);
+  // const { socket } = useSelector((store) => store.socket);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,13 +28,14 @@ const Sidebar = () => {
       const res = await axios.get(`http://localhost:8080/api/v1/user/logout`);
       navigate("/login");
       toast.success(res.data.message);
+      dispatch(setAuthUser(null));
     } catch (error) {
       console.log(error);
     }
   };
   const searchSubmitHandler = (e) => {
     e.preventDefault();
-    if(!search){
+    if (!search) {
       setSearchedUsers(null);
       return;
     }
@@ -40,7 +44,7 @@ const Sidebar = () => {
     );
     if (filteredUsers.length > 0) {
       setSearchedUsers(filteredUsers);
-    }else{
+    } else {
       toast.error("User not found!");
     }
   };
@@ -64,7 +68,7 @@ const Sidebar = () => {
       </form>
       <div className="divider px-3"></div>
       <div className="flex-1 overflow-hidden">
-        <OtherUsers users={searchedUsers || otherUsers}/>
+        <OtherUsers users={searchedUsers || otherUsers} />
       </div>
       <div className="">
         <button onClick={logoutHandler} className="btn btn-sm">
