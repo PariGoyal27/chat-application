@@ -47,19 +47,19 @@ A full-stack real-time chat application built using the MERN stack and Socket.IO
 
 ### Login Page
 
-![Login Page](screenshots/login.png)
+![Login Page](screenshots/login.png.png)
 
 ### Signup Page
 
-![Signup Page](screenshots/signup.png)
+![Signup Page](screenshots/signup.png.png)
 
 ### Chat Interface
 
-![Chat Interface](screenshots/chat.png)
+![Chat Interface](screenshots/chat.png.png)
 
 ### Online Users
 
-![Online Users](screenshots/online-users.png)
+![Online Users](screenshots/online-users.png.png)
 
 ## 📂 Project Structure
 
